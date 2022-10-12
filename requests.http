@@ -1,0 +1,1 @@
+GET https://gateway.marvel.com/v1/public/characters?ts=9&apikey=018e11be788423f319352372c864bef3&hash=99bbbae20064f797bc61f67564cd7b26 HTTP/1.1
