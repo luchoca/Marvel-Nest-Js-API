@@ -51,13 +51,21 @@ export class HeroController {
       this.heroNoSQLService.delete(idHeroe);
     }
 
+
+
+
+
+
   //--> CRUD SQL
+
+
+
   @Post('sql/:id')
-  saveHeroSQL(@Param('id') id:string){
-    //const hero  = this.marvelHeroService.getAllHeros(id);
-    this.heroSQLService.save();
+  async saveHeroSQL(@Param('id',ParseIntPipe) id:number){
+    const heroe = await this.marvelHeroService.getHeroePorIDsql(id);
+    return this.heroSQLService.save(heroe,id);
+    
   }
 
   
-
 }

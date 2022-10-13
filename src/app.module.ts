@@ -36,7 +36,7 @@ console.log(process.env.ENV)
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        // autoLoadEntities:true,
+        autoLoadEntities:true,
         synchronize:true,
         logging: process.env.ENV === 'production' ? false:true,
       }),

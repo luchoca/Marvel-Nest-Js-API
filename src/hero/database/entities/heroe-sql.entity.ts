@@ -1,19 +1,27 @@
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable} from 'typeorm';
+import { ComicSQL } from './comic-sql.entity';
 
-@Entity('Heroe')
+@Entity()
 export class Heroe{
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column()
-    idCharacter:string;
+    idHeroe:number;
 
     @Column()
     name:string;
  
-    @Column() 
+    @Column({nullable:true}) 
     description: string;
 
     @Column()
-    thumbnail:string;
+    path:string;
+
+    @Column()
+    extension:string;
+
+    @ManyToMany(()=>ComicSQL,(comic)=>comic.heroes)
+    @JoinTable({name:"heroe_comic"})
+    comics: ComicSQL[];
 }

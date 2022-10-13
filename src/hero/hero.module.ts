@@ -13,13 +13,14 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Comic, ComicSchema } from "./database/schemas/comic-nosql.schema";
 import { ComicSummary, ComicSummarySchema } from "./database/schemas/comicSummary-nosql.schema";
+import { ComicSQL } from "./database/entities/comic-sql.entity";
 
 
 // ComicEntity, ComicSummaryEntity
 @Module({
     imports:[
         HttpModule,
-        TypeOrmModule.forFeature([Heroe]),
+        TypeOrmModule.forFeature([Heroe,ComicSQL]),
         MongooseModule.forFeature([
             { name: Heroe.name, schema: HeroeSchema },
             { name: Comic.name, schema: ComicSchema },
