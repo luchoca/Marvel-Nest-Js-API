@@ -1,4 +1,4 @@
-import { IsInt, IsPositive, IsString, Min } from 'class-validator';
+import { IsInt, IsPositive, IsString, Min, MinLength } from 'class-validator';
 
 
 export class CreateComicSQLDto {
@@ -9,7 +9,7 @@ export class CreateComicSQLDto {
 
   @IsString()
   @IsPositive()
-  @Min(1)
+  @MinLength(1)
   name: string;
 
   @IsInt()

@@ -6,6 +6,7 @@ import { Comic } from '../database/schemas/comic-nosql.schema';
 import { Heroe } from '../database/schemas/heroe-nosql.schema';
 import { CreateComicDto } from '../dto/create-comic.dto';
 import { CreateHeroeDto } from '../dto/create-heroe.dto';
+import { UpdateHeroeDto } from '../dto/update-heroe.dto';
 import { IComic } from '../interface/comic.interface';
 import { IHero } from '../interface/hero.interface';
 
@@ -18,6 +19,9 @@ export class HeroNoSQLService {
     private readonly comicModel: Model<IComic>,
   ) {}
 
+
+
+//SAVE
   async save(heroDto: CreateHeroeDto, idHeroe: number): Promise<IHero> {
     const heroe = await this.heroeModel.findOne({ idHeroe: idHeroe });
     if (heroe) {
@@ -28,11 +32,17 @@ export class HeroNoSQLService {
     }
   }
 
+
+
+//DELETE
   async delete(idHeroe: string): Promise<IHero> {
     const heroeDelete = await this.heroeModel.findByIdAndDelete(idHeroe);
     return heroeDelete;
   }
 
+
+
+//SAVE COMICS EN CHARACTERS
   async saveComics(comicsDto: CreateComicDto[], id: number): Promise<IComic[]> {
     const comicsCreados = comicsDto.map(async (comicDto) => {
       const comicExiste = await this.comicModel.findOne({ id: comicDto.id });
@@ -53,7 +63,35 @@ export class HeroNoSQLService {
     return comicsRetornados;
   }
 
-  update() {
-    throw new Error('no está implementado');
+
+  ///UPDATE
+  async update(nuevoHeroe: CreateHeroeDto, id: string) {
+
+    const actualizado = await this.heroeModel.findByIdAndUpdate(id, nuevoHeroe,{new:true})
+    if(!actualizado) throw new BadRequestException("Algo salio mal !")
+    return actualizado;
+
   }
+
 }
+
+
+
+
+
+
+// await this.characterRepository
+//             .createQueryBuilder()
+//             .update(CharacterEntity)
+//             .set({name: newName})
+//             .where({char_id: id})
+//             .execute();
+
+
+
+// await this.characterRepository
+//         .createQueryBuilder()
+//         .delete()
+//         .from(CharacterEntity)
+//         .where({char_id: id})
+//         .execute()

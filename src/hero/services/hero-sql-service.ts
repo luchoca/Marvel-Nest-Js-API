@@ -42,13 +42,17 @@ export class HeroSQLService {
         return Promise.all(comicRetorno)
     }
 
+
+    async deleteHero(idHeroe: string){
+        const heroeDelete = await this.heroeRepository.delete(idHeroe);
+        return heroeDelete;
+      }
+
+
     update(){
         throw new Error('no está implementado')
     }
 
-    dalete(){
-        throw new Error('no está implementado')
-    }
 
     
 }
